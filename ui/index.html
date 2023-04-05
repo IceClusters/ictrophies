@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <audio id="page" src="sound.ogg"></audio>
+    <div class="container__notify">
+        <div class="notify">
+            <div class="achievement-banner animated">
+                <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
+                <div class="achievement-trophy xbox-icon xbox-logo"><i class="fas fa-trophy trophie__img"  style="font-size: 3.2vh; "></i></div>
+
+                <div class="achievement-text">
+                    <div class="flex">
+                        <div class="achievement-notification">Achievement Unlocked</div>
+                        <div class="achievement-name"> 1,000 &ndash; CSS Achievement Banner</div>
+                        
+                    </div>
+                </div>
+
+                <!-- <div class="achievement-text">
+                    <p class="achievement-notification">Achievement Unlocked</p>
+                    <p class="achievement-name"><i class="xbox-icon xbox-gamerscore"></i> 1,000 &ndash; CSS Achievement Banner</p>
+                </div> -->
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="container_confeti">
+        <canvas id="confeti" class="active"></canvas>
+    </div>
+    <script src="js/app.js"></script>
+    <script src="js/confeti.js" type="module"></script>
+    </body>
+</html>
