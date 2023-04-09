@@ -28,6 +28,15 @@ function NewTrophy(id)
     else
         TriggerServerEvent("ice_trophies:server:newTrophy", id, {})
     end
+    -- print("hola")
+    -- SendNUIMessage({
+    --     action = "NewTrophy",
+    --     title = "Paquitoo",
+    --     description = "Has ganado a paquito",
+    --     difficult = "easy",
+    --     confetti = true,
+    --     sound = true
+    -- })
 end
 
 exports('NewTrophy', NewTrophy)

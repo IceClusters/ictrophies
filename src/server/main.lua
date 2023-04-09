@@ -32,7 +32,7 @@ AddEventHandler("ice_trophies:server:newTrophy", function(id, currentTrophies)
         else
             exports.oxmysql:query_async("UPDATE players_trophies SET trophies = @trophies WHERE license = @license", {["@license"] = license,["@trophies"] = json.encode(currentTrophies)})
         end
-        --TriggerClientEvent("ice_trophies:client:getCurrentTrophies", src, trophiesData)
+        TriggerClientEvent("ice_trophies:client:getCurrentTrophies", src, trophiesData)
     elseif Config.Mysql == "mysql-async" then
 
     else 

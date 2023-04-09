@@ -11,9 +11,9 @@
     <title>Document</title>
 </head>
 <body>
-    <audio id="page" src="sound.ogg"></audio>
+    <audio id="achievementSound" src="sound.ogg"></audio>
     <div class="container__notify">
-        <div class="notify">
+        <div class="notify" id="achievementContainer" style="display: none;">
             <div class="achievement-banner animated">
                 <div class="achievement-loader"></div>
                 <div class="achievement-loader"></div>
@@ -24,8 +24,8 @@
 
                 <div class="achievement-text">
                     <div class="flex">
-                        <div class="achievement-notification">Achievement Unlocked</div>
-                        <div class="achievement-name"> 1,000 &ndash; CSS Achievement Banner</div>
+                        <div class="achievement-notification" id="achievementTitle">Achievement Unlocked</div>
+                        <div class="achievement-name" id="achievementDescription"> 1,000 &ndash; CSS Achievement Banner</div>
                         
                     </div>
                 </div>
@@ -42,7 +42,6 @@
     <div class="container_confeti">
         <canvas id="confeti" class="active"></canvas>
     </div>
-    <script src="js/app.js"></script>
-    <script src="js/confeti.js" type="module"></script>
+    <script src="js/app.js" type="module"></script>
     </body>
 </html>
