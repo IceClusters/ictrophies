@@ -74,28 +74,32 @@ function shootConfetti() {
     }, 300);
 }
 
-function Trophy(title, description, difficult, confeti, sound) {
+function Trophy(title, description, type, confeti, sound) {
     this.title = title;
     this.description = description;
-    this.difficult = difficult;
+    this.type = type;
     this.confeti = confeti;
     this.sound = sound;
     this.Show = function () {
         $("#achievementTitle").html(this.title);
         $("#achievementDescription").html(this.description);
         $("#achievementContainer").css("display", "block")
-        if(this.confeti)
+        if (this.sound)
             $("#achievementSound")[0].play()
-        if(this.sound)
+        if (this.confeti)
             shootConfetti();
+
+        setTimeout(() => {
+            $("#achievementContainer").css("display", "none")
+        }, 10000);
     }
 }
-$(document).ready(function(){
-    window.addEventListener("message", function(event){
-        switch(event.data.action){
+$(document).ready(function () {
+    window.addEventListener("message", function (event) {
+        switch (event.data.action) {
             case "NewTrophy":
                 const a = event.data;
-                let trophy = new Trophy(a.title, a.description, a.difficult, a.confetti, a.sound)
+                let trophy = new Trophy(a.title, a.description, a.type, a.confetti, a.sound)
                 trophy.Show();
         }
     })

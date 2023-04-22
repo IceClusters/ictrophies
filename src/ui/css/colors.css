@@ -1,0 +1,20 @@
+:root {
+    /* COLORS */
+    --main-color: #131313;
+    --main-color-light: #181818;
+    --main-color-light_trpr: #252525;
+    --main-color-dark: #101010;
+    /* TROPHIES */
+    --bronze-color-one: #cd7f32;
+    --bronze-color-two: #cd7f32;
+    --bronze-color-three: #cd7f32;
+
+    --silver-color-one: #888888;
+    --silver-color-two: #ffffff;
+    --silver-color-three: #888888;
+
+    /* SIZE */
+    --decoration-width: 8vh;
+    --decoration-height: 8vh;
+    --main-width: 30vh;
+}

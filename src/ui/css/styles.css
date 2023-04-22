@@ -2,122 +2,168 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
-html, body {
-    /* background-color: #333; */
-    font-family: "Raleway", sans-serif;
-    color: #fff;
-    overflow: hidden;
+html,
+body {
+  /* background-color: #333; */
+  font-family: "Raleway", sans-serif;
+  color: #fff;
+  overflow: hidden;
 }
 
-  :root{
-     --main-color: #131313;
-    --main-color-light: #181818;
-    --main-color-light_trpr: #252525;
-    --main-color-dark: #101010;
-    --decoration-width: 8vh;
-    --decoration-height: 8vh;
-    --main-width: 30vh;
-  }
+/* :root {
+  --main-color: #131313;
+  --main-color-light: #181818;
+  --main-color-light_trpr: #252525;
+  --main-color-dark: #101010;
+  --decoration-width: 8vh;
+  --decoration-height: 8vh;
+  --main-width: 30vh;
+} */
 
 
-.container__notify{
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 20vh;
-    
+.container__notify {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20vh;
+
 }
 
-.notify{
-    height: 10vh;
-    left: 0;
-    margin: auto;
-    right: 0;
-    border-radius: 2vh;
-    background-color: transparent;
-    animation: pp 1s ease-in-out; 
+.notify {
+  height: 10vh;
+  left: 0;
+  margin: auto;
+  right: 0;
+  border-radius: 2vh;
+  background-color: transparent;
+  animation: pp 1s ease-in-out;
 }
 
-.achievement-banner .achievement-loader, .achievement-banner-big .achievement-loader, .achievement-banner-big .achievement-banner .achievement-trophy, .achievement-banner-big .achievement-banner-big .achievement-trophy, .achievement-banner .achievement-banner-big .achievement-trophy, .achievement-banner .achievement-trophy{
-    width: var(--decoration-width);
-    height: var(--decoration-height);
-    position: absolute;
-    border-radius: 2vh;
-    background-color: var(--main-color);
-    animation: achievementLoaderAnimationFrames ease 9s;
-    animation-iteration-count: 1;
-    transform: scaleX(0) scaleY(0);
-    transform-origin: 50% 50%;
+.achievement-banner .achievement-loader,
+.achievement-banner-big .achievement-loader,
+.achievement-banner-big .achievement-banner .achievement-trophy,
+.achievement-banner-big .achievement-banner-big .achievement-trophy,
+.achievement-banner .achievement-banner-big .achievement-trophy,
+.achievement-banner .achievement-trophy {
+  width: var(--decoration-width);
+  height: var(--decoration-height);
+  position: absolute;
+  border-radius: 2vh;
+  background-color: var(--main-color);
+  animation: achievementLoaderAnimationFrames ease 9s;
+  animation-iteration-count: 1;
+  transform: scaleX(0) scaleY(0);
+  transform-origin: 50% 50%;
 }
 
-.achievement-banner .achievement-loader:nth-of-type(1), .achievement-banner-big .achievement-loader:nth-of-type(1), .achievement-banner-big .achievement-banner .achievement-trophy:nth-of-type(1), .achievement-banner-big .achievement-banner-big .achievement-trophy:nth-of-type(1), .achievement-banner .achievement-banner-big .achievement-trophy:nth-of-type(1), .achievement-banner .achievement-trophy:nth-of-type(1) {
-    /*when the spec is finished*/
-    background-color: var(--main-color);
-    animation-duration: 10s;
-  }
-  .achievement-banner .achievement-loader:nth-of-type(2), .achievement-banner-big .achievement-loader:nth-of-type(2), .achievement-banner-big .achievement-banner .achievement-trophy:nth-of-type(2), .achievement-banner-big .achievement-banner-big .achievement-trophy:nth-of-type(2), .achievement-banner .achievement-banner-big .achievement-trophy:nth-of-type(2), .achievement-banner .achievement-trophy:nth-of-type(2) {
-    background-color: var(--main-color-light);
-    animation-delay: 0.25s;
-    animation-duration: 9.5s;
-  }
-  .achievement-banner .achievement-loader:nth-of-type(3), .achievement-banner-big .achievement-loader:nth-of-type(3), .achievement-banner-big .achievement-banner .achievement-trophy:nth-of-type(3), .achievement-banner-big .achievement-banner-big .achievement-trophy:nth-of-type(3), .achievement-banner .achievement-banner-big .achievement-trophy:nth-of-type(3), .achievement-banner .achievement-trophy:nth-of-type(3) {
-    background-color: var(--main-color-dark);
-    animation-delay: 0.5s;
-    animation-duration: 9s;
-  }
-  .achievement-banner .achievement-loader:nth-of-type(4), .achievement-banner-big .achievement-loader:nth-of-type(4), .achievement-banner-big .achievement-banner .achievement-trophy:nth-of-type(4), .achievement-banner-big .achievement-banner-big .achievement-trophy:nth-of-type(4), .achievement-banner .achievement-banner-big .achievement-trophy:nth-of-type(4), .achievement-banner .achievement-trophy:nth-of-type(4) {
-    background-color: var(--main-color-light);
-    animation-delay: 0.75s;
-    animation-duration: 8.5s;
-  }
-  .achievement-banner .achievement-loader:nth-of-type(5), .achievement-banner-big .achievement-loader:nth-of-type(5), .achievement-banner-big .achievement-banner .achievement-trophy:nth-of-type(5), .achievement-banner-big .achievement-banner-big .achievement-trophy:nth-of-type(5), .achievement-banner .achievement-banner-big .achievement-trophy:nth-of-type(5), .achievement-banner .achievement-trophy:nth-of-type(5) {
-    background-color: var(--main-color-light);
-    animation-delay: 1s;
-    animation-duration: 8s;
-  }
-  .achievement-banner .achievement-trophy, .achievement-banner-big .achievement-trophy {
-    background-color: var(--main-color-light);
-    animation: xboxLogoAnimationFrames ease-out 7.5s;
-    animation-delay: 1s;
-    color: #fff;
-    background-color: transparent !important;
-  }
-  .achievement-banner .achievement-trophy:before, .achievement-banner-big .achievement-trophy:before {
-    font-size: 3em;
-    position: absolute;
-  }
+.achievement-banner .achievement-loader:nth-of-type(1),
+.achievement-banner-big .achievement-loader:nth-of-type(1),
+.achievement-banner-big .achievement-banner .achievement-trophy:nth-of-type(1),
+.achievement-banner-big .achievement-banner-big .achievement-trophy:nth-of-type(1),
+.achievement-banner .achievement-banner-big .achievement-trophy:nth-of-type(1),
+.achievement-banner .achievement-trophy:nth-of-type(1) {
+  /*when the spec is finished*/
+  background-color: var(--main-color);
+  animation-duration: 10s;
+}
 
-  .achievement-banner, .achievement-banner-big {
-    position: relative;
-    width: var(--decoration-width);
-    height: var(--decoration-height);
-    border-radius: 2vh;
-    background-color: transparent;
-    overflow: hidden;
-  }
+.achievement-banner .achievement-loader:nth-of-type(2),
+.achievement-banner-big .achievement-loader:nth-of-type(2),
+.achievement-banner-big .achievement-banner .achievement-trophy:nth-of-type(2),
+.achievement-banner-big .achievement-banner-big .achievement-trophy:nth-of-type(2),
+.achievement-banner .achievement-banner-big .achievement-trophy:nth-of-type(2),
+.achievement-banner .achievement-trophy:nth-of-type(2) {
+  background-color: var(--main-color-light);
+  animation-delay: 0.25s;
+  animation-duration: 9.5s;
+}
 
-  .achievement-banner.animated, .achievement-banner-big.animated {
-    animation: mainAnimationFrames ease-in 7.5s;
-    animation-delay: 0.5s;
-    animation-iteration-count: 1;
-    transform-origin: 50% 50%;
-    animation-fill-mode: forwards;
-    /*when the spec is finished*/
-  }
+.achievement-banner .achievement-loader:nth-of-type(3),
+.achievement-banner-big .achievement-loader:nth-of-type(3),
+.achievement-banner-big .achievement-banner .achievement-trophy:nth-of-type(3),
+.achievement-banner-big .achievement-banner-big .achievement-trophy:nth-of-type(3),
+.achievement-banner .achievement-banner-big .achievement-trophy:nth-of-type(3),
+.achievement-banner .achievement-trophy:nth-of-type(3) {
+  background-color: var(--main-color-dark);
+  animation-delay: 0.5s;
+  animation-duration: 9s;
+}
 
-  .achievement-banner-big {
-    width: var(--main-width);
-    background-color: var(--main-color-light);
-  }
-  .xbox-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.achievement-banner .achievement-loader:nth-of-type(4),
+.achievement-banner-big .achievement-loader:nth-of-type(4),
+.achievement-banner-big .achievement-banner .achievement-trophy:nth-of-type(4),
+.achievement-banner-big .achievement-banner-big .achievement-trophy:nth-of-type(4),
+.achievement-banner .achievement-banner-big .achievement-trophy:nth-of-type(4),
+.achievement-banner .achievement-trophy:nth-of-type(4) {
+  background-color: var(--main-color-light);
+  animation-delay: 0.75s;
+  animation-duration: 8.5s;
+}
 
-.container_confeti{
+.achievement-banner .achievement-loader:nth-of-type(5),
+.achievement-banner-big .achievement-loader:nth-of-type(5),
+.achievement-banner-big .achievement-banner .achievement-trophy:nth-of-type(5),
+.achievement-banner-big .achievement-banner-big .achievement-trophy:nth-of-type(5),
+.achievement-banner .achievement-banner-big .achievement-trophy:nth-of-type(5),
+.achievement-banner .achievement-trophy:nth-of-type(5) {
+  background-color: var(--main-color-light);
+  animation-delay: 1s;
+  animation-duration: 8s;
+}
+
+.achievement-banner .achievement-trophy,
+.achievement-banner-big .achievement-trophy {
+  background-color: var(--main-color-light);
+  animation: xboxLogoAnimationFrames ease-out 7.5s;
+  animation-delay: 1s;
+  color: #fff;
+  background-color: transparent !important;
+}
+
+.achievement-banner .achievement-trophy:before,
+.achievement-banner-big .achievement-trophy:before {
+  font-size: 3em;
+  position: absolute;
+}
+
+.achievement-banner,
+.achievement-banner-big {
+  position: relative;
+  width: var(--decoration-width);
+  height: var(--decoration-height);
+  border-radius: 2vh;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.achievement-banner.animated,
+.achievement-banner-big.animated {
+  animation: mainAnimationFrames ease-in 7.5s;
+  animation-delay: 0.5s;
+  animation-iteration-count: 1;
+  transform-origin: 50% 50%;
+  animation-fill-mode: forwards;
+  /*when the spec is finished*/
+}
+
+.achievement-banner-big {
+  width: var(--main-width);
+  background-color: var(--main-color-light);
+}
+
+.xbox-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, var(--silver-color-one) 25%, var(--silver-color-two) 50%, var(--silver-color-three) 75%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+.container_confeti {
   position: relative;
   width: 100%;
   height: 100%;
@@ -125,16 +171,16 @@ html, body {
 }
 
 canvas {
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
 }
 
 .trophie__img {
-  text-shadow: 0 0 0.4vh #fff !important;
+  /* text-shadow: 0 0 0.4vh #fff !important; */
 }
 
 
-.achievement-text{
+.achievement-text {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -144,7 +190,7 @@ canvas {
 }
 
 
-.flex{
+.flex {
   position: relative;
   height: 50%;
   left: 8vh;
@@ -180,112 +226,133 @@ canvas {
 
 
 @keyframes achievementLoaderAnimationFrames {
-    0% {
-      transform: scaleX(0) scaleY(0);
-    }
-    10% {
-      transform: scaleX(1) scaleY(1);
-    }
-    90% {
-      transform: scaleX(1) scaleY(1);
-    }
-    100% {
-      transform: scaleX(0) scaleY(0);
-    }
+  0% {
+    transform: scaleX(0) scaleY(0);
   }
 
-  @keyframes mainAnimationFrames {
-    10% {
-      background: var(--main-color-light);
-    }
-    15% {
-      width: var(--decoration-width);
-      height: var(--decoration-height);
-    }
-    20% {
-      width: var(--decoration-width);
-      height: var(--decoration-height);
-    }
-    30% {
-      width: var(--main-width);
-    }
-    80% {
-      width: var(--main-width);
-    }
-    90% {
-      width: var(--decoration-width);
-      height: var(--decoration-height);
-      background-color: var(--main-color-light);
-    }
-    95% {
-      width: var(--decoration-width);
-      height: var(--decoration-height);
-      background-color: transparent;
-    }
+  10% {
+    transform: scaleX(1) scaleY(1);
   }
 
-  @keyframes xboxLogoAnimationFrames {
-    0% {
-      background-color: transparent !important;
-      transform: scaleX(0) scaleY(0);
-    }
-    5% {
-      background-color: transparent !important;
-      transform: scaleX(1.2) scaleY(1.2);
-    }
-    10% {
-      background-color: transparent !important;
-      transform: scaleX(1) scaleY(1);
-    }
-    90% {
-      background-color: transparent !important;
-      transform: scaleX(1) scaleY(1);
-    }
-    95% {
-      background-color: transparent !important;
-      transform: scaleX(1.2) scaleY(1.2);
-    }
-    100% {
-      background-color: transparent !important;
-      transform: scaleX(0) scaleY(0);
-    }
+  90% {
+    transform: scaleX(1) scaleY(1);
   }
 
+  100% {
+    transform: scaleX(0) scaleY(0);
+  }
+}
 
-  @keyframes achievementTextAnimationFrames {
-    0% {
-      opacity: 0;
-      /* top: -77px; */
-    }
-    40% {
-      opacity: 1;
-    }
-    55% {
-      opacity: 1;
-      /* top: -77px; */
-      /* right: 0; */
-    }
-    100% {
-      opacity: 0;
-      /* top: -138px; */
-    }
+@keyframes mainAnimationFrames {
+  10% {
+    background: var(--main-color-light);
   }
-  @keyframes achievementNameAnimationFrames {
-    0% {
-      opacity: 0;
-      /* top: 75px; */
-    }
-    20% {
-      opacity: 1;
-      /* top: 9px; */
-    }
-    90% {
-      opacity: 1;
-      /* top: 9px; */
-      /* right: 0; */
-    }
-    100% {
-      opacity: 0;
-      /* top: 9px; */
-    }
+
+  15% {
+    width: var(--decoration-width);
+    height: var(--decoration-height);
   }
+
+  20% {
+    width: var(--decoration-width);
+    height: var(--decoration-height);
+  }
+
+  30% {
+    width: var(--main-width);
+  }
+
+  80% {
+    width: var(--main-width);
+  }
+
+  90% {
+    width: var(--decoration-width);
+    height: var(--decoration-height);
+    background-color: var(--main-color-light);
+  }
+
+  95% {
+    width: var(--decoration-width);
+    height: var(--decoration-height);
+    background-color: transparent;
+  }
+}
+
+@keyframes xboxLogoAnimationFrames {
+  0% {
+    background-color: transparent !important;
+    transform: scaleX(0) scaleY(0);
+  }
+
+  5% {
+    background-color: transparent !important;
+    transform: scaleX(1.2) scaleY(1.2);
+  }
+
+  10% {
+    background-color: transparent !important;
+    transform: scaleX(1) scaleY(1);
+  }
+
+  90% {
+    background-color: transparent !important;
+    transform: scaleX(1) scaleY(1);
+  }
+
+  95% {
+    background-color: transparent !important;
+    transform: scaleX(1.2) scaleY(1.2);
+  }
+
+  100% {
+    background-color: transparent !important;
+    transform: scaleX(0) scaleY(0);
+  }
+}
+
+
+@keyframes achievementTextAnimationFrames {
+  0% {
+    opacity: 0;
+    /* top: -77px; */
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  55% {
+    opacity: 1;
+    /* top: -77px; */
+    /* right: 0; */
+  }
+
+  100% {
+    opacity: 0;
+    /* top: -138px; */
+  }
+}
+
+@keyframes achievementNameAnimationFrames {
+  0% {
+    opacity: 0;
+    /* top: 75px; */
+  }
+
+  20% {
+    opacity: 1;
+    /* top: 9px; */
+  }
+
+  90% {
+    opacity: 1;
+    /* top: 9px; */
+    /* right: 0; */
+  }
+
+  100% {
+    opacity: 0;
+    /* top: 9px; */
+  }
+}
