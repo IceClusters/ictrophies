@@ -1,0 +1,188 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600;800&display=swap');
+
+.container__menu {
+    position: absolute;
+    /* display: flex; */
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    right: 0;
+    width: 70%;
+    height: 100%;
+}
+
+.menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70vh;
+    height: 50vh;
+    background-color: rgba(20, 20, 20, 1);
+    border-radius: .5vh;
+}
+
+.grid {
+    position: relative;
+    display: grid;
+    gap: 2% 2%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 0.5fr 0.6fr 1.5fr;
+    width: 100%;
+    height: 100%;
+}
+
+
+.section__name {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: 1 / 1 / 2 / 4;
+}
+
+.section__archivements {
+    position: relative;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.section__friends {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.section__progression {
+    position: relative;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    grid-area: 2 / 3 / 3 / 4;
+}
+
+.section__trophies {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: 3 / 1 / 4 / 4;
+}
+
+
+/* username section */
+
+.user_section {
+    width: 100%;
+    height: 9vh;
+    bottom: 0;
+    overflow: visible;
+    position: absolute;
+}
+
+.container_logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10vh;
+    top: -5vh;
+    position: absolute;
+
+}
+
+#logo_user {
+    height: 9vh;
+    border-radius: 1vh;
+    overflow: hidden;
+}
+
+#logo_user img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.username__text {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2vh;
+    margin-top: 3vh;
+    width: 100%;
+    height: 100%;
+    font-size: 1.5vh;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    text-shadow: 0 0 0.3vh #000000;
+    font-weight: 600;
+    z-index: 22;
+}
+
+/* Archivements Section */
+
+.container__style {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5vh;
+    background-color: rgba(22, 22, 22, 0.5);
+    backdrop-filter: blur(0.5vh);
+    overflow: hidden;
+}
+
+.archivements {
+    position: absolute;
+    width: 95%;
+    right: 0;
+}
+
+.progression {
+    position: absolute;
+    width: 95%;
+    left: 0;
+}
+
+.trophies {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 95%;
+    margin: 1vh;
+    border-radius: 0.5vh;
+    background-color: rgba(22, 22, 22, 0.5);
+    backdrop-filter: blur(0.5vh);
+    overflow: hidden;
+}
+
+.slider_trophies {
+    position: absolute;
+    display: block;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+}
+
+#no-items {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    z-index: 22;
+}

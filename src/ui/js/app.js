@@ -104,3 +104,12 @@ $(document).ready(function () {
         }
     })
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const name = "KDex"
+    const nombre = name.split(" ").map((word) => word.charAt(0).toUpperCase()).join("");
+    const imgUrl = `http://via.placeholder.com/100x100&text=${nombre}`
+    const userPhoto = document.getElementById("logo_user");
+    userPhoto.innerHTML = `<img src="${imgUrl}">`;
+
+});

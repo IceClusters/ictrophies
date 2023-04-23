@@ -44,6 +44,17 @@ function NewTrophy(id)
     })
 end
 
+
+Citizen.CreateThread(function()
+    TriggerServerCallback {
+        eventName = 'ice-test:test',
+        timeout = 5000,
+        callback = function(result, data, value)
+            print('pepe', result, data, value)
+        end
+    }
+end)
+
 RegisterCommand("trophy", function()
     NewTrophy("car")
 end, false)
