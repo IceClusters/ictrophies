@@ -20,7 +20,15 @@ AddEventHandler("ice_trophies:server:getCurrentTrophies", function()
         TriggerClientEvent("ice_trophies:client:getCurrentTrophies", src, trophiesData)
     elseif Config.Mysql == "mysql-async" then
 
-    else 
+    elseif Config.Mysql == "icemysql" then
+        local trophiesData = exports["ice_mysql"]:MakeQuery(1, "SELECT trophies FROM players_trophies WHERE license = ?", {license})
+        if #trophiesData ~= 0 then 
+            trophiesData = json.decode(trophiesData[1]["trophies"])
+        else
+            trophiesData = {}
+        end
+        TriggerClientEvent("ice_trophies:client:getCurrentTrophies", src, trophiesData)
+    else
         print("Can't find mysql system")
     end
 end)
@@ -43,6 +51,13 @@ AddEventHandler("ice_trophies:server:newTrophy", function(id, currentTrophies)
         TriggerClientEvent("ice_trophies:client:getCurrentTrophies", src, currentTrophies)
     elseif Config.Mysql == "mysql-async" then
 
+    elseif Config.Mysql == "icemysql" then
+        if count == 1 then 
+            exports["ice_mysql"]:MakeQuery(1, "INSERT INTO players_trophies (license, trophies) VALUES (?, ?)", {license,json.encode(currentTrophies)})
+        else
+            local result = exports["ice_mysql"]:MakeQuery(1, "UPDATE players_trophies SET trophies = ? WHERE license = ?", {json.encode(currentTrophies), license})
+        end
+        TriggerClientEvent("ice_trophies:client:getCurrentTrophies", src, currentTrophies)
     else 
         print("Can't find mysql system")
     end

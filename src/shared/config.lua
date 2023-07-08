@@ -4,7 +4,7 @@
 -- 2 = hard
 
 Config = {}
-Config.Mysql = "oxmysql" -- mysql-async, oxmysql
+Config.Mysql = "icemysql" -- mysql-async, oxmysql, icemysql
 Config.Trophies = {
     ["job"] = {
         ["title"] = "First Job",
