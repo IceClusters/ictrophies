@@ -1,6 +1,4 @@
 import confetti from "https://cdn.skypack.dev/canvas-confetti@1.4.0";
-
-const confettiBtn = document.querySelector(".canvas-confetti-btn");
 let exploding = false;
 
 const defaults = {
@@ -18,7 +16,6 @@ const fire = (particleRatio, opts) => {
                 y: 0
             },
             angle: -40,
-            //   spread: 180
         })
     );
 
@@ -30,48 +27,97 @@ const fire = (particleRatio, opts) => {
                 y: 0
             },
             angle: 220,
-            //   spread: 180
         })
     );
 };
 
-// var notify = document.getElementById("page");
-// notify.volume = 0.5;
+$(document).ready(function () {
+    notify.currentTime = 0
+    notify.play();
+});
 
-// $(document).ready(function() {
-//     notify.currentTime = 0
-//     notify.play();
-// });
+function shootConfetti(type) {
+    switch (type) {
+        case 0:
+            window.setTimeout(() => {
+                fire(0.25, {
+                    spread: 26,
+                    startVelocity: 55,
+                });
+                fire(0.2, {
+                    spread: 60,
+                });
+                fire(0.35, {
+                    spread: 100,
+                    decay: 0.91,
+                    scalar: 0.8,
+                });
+                fire(0.1, {
+                    spread: 120,
+                    startVelocity: 25,
+                    decay: 0.92,
+                    scalar: 1.2,
+                });
+                fire(0.1, {
+                    spread: 120,
+                    startVelocity: 45,
+                });
 
-function shootConfetti() {
-    window.setTimeout(() => {
-        fire(0.25, {
-            spread: 26,
-            startVelocity: 55,
-        });
-        fire(0.2, {
-            spread: 60,
-        });
-        fire(0.35, {
-            spread: 100,
-            decay: 0.91,
-            scalar: 0.8,
-        });
-        fire(0.1, {
-            spread: 120,
-            startVelocity: 25,
-            decay: 0.92,
-            scalar: 1.2,
-        });
-        fire(0.1, {
-            spread: 120,
-            startVelocity: 45,
-        });
+                window.setTimeout(() => {
+                    exploding = false;
+                }, 300);
+            }, 300);
+            break;
+        case 1:
+            var duration = 9 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-        window.setTimeout(() => {
-            exploding = false;
-        }, 300);
-    }, 300);
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function () {
+                var timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                var particleCount = 50 * (timeLeft / duration);
+                // since particles fall down, start a bit higher than random
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+            break;
+        case 2:
+            var end = Date.now() + (9 * 1000);
+            // go Buckeyes!
+            var colors = ['#bb0000', '#ffffff'];
+
+            (function frame() {
+                confetti({
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+            break;
+    }
+
 }
 
 function Trophy(title, description, type, confeti, sound) {
@@ -87,7 +133,7 @@ function Trophy(title, description, type, confeti, sound) {
         if (this.sound)
             $("#achievementSound")[0].play()
         if (this.confeti)
-            shootConfetti();
+            shootConfetti(this.type);
 
         setTimeout(() => {
             $("#achievementContainer").css("display", "none")
@@ -95,16 +141,13 @@ function Trophy(title, description, type, confeti, sound) {
     }
 }
 $(document).ready(function () {
-    // let trophy = new Trophy("title", "description", "professional", true, true);
-    // trophy.Show();
+    let trophy = new Trophy("title", "description", 2, true, true).Show();
+
     window.addEventListener("message", function (event) {
-
-
         switch (event.data.action) {
             case "NewTrophy":
                 const a = event.data;
-                let trophy = new Trophy(a.title, a.description, a.type, a.confetti, a.sound)
-                trophy.Show();
+                let trophy = new Trophy(a.title, a.description, a.type, a.confetti, a.sound).Show();
         }
     })
 });

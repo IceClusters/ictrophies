@@ -1,3 +1,8 @@
+-- Confetties types: 
+-- 0 = easy
+-- 1 = medium
+-- 2 = hard
+
 Config = {}
 Config.Mysql = "oxmysql" -- mysql-async, oxmysql
 Config.Trophies = {
@@ -5,7 +10,7 @@ Config.Trophies = {
         ["title"] = "First Job",
         ["description"] = "Get your fist job in the server",
         ["other"] = {
-            ["type"] = "easy",
+            ["type"] = 0,
             ["confetti"] = true,
             ["sound"] = true
         },
@@ -14,7 +19,7 @@ Config.Trophies = {
         ["title"] = "First House",
         ["description"] = "Get your fist house in the server",
         ["other"] = {
-            ["type"] = "medium",
+            ["type"] = 1,
             ["confetti"] = false,
             ["sound"] = true
         },
@@ -23,7 +28,7 @@ Config.Trophies = {
         ["title"] = "First Car",
         ["description"] = "Get your fist car in the server",
         ["other"] = {
-            ["type"] = "professional",
+            ["type"] = 2,
             ["confetti"] = true,
             ["sound"] = false
         },
