@@ -95,7 +95,11 @@ function Trophy(title, description, type, confeti, sound) {
     }
 }
 $(document).ready(function () {
+    // let trophy = new Trophy("title", "description", "professional", true, true);
+    // trophy.Show();
     window.addEventListener("message", function (event) {
+
+
         switch (event.data.action) {
             case "NewTrophy":
                 const a = event.data;
@@ -104,6 +108,8 @@ $(document).ready(function () {
         }
     })
 });
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const name = "KDex"
