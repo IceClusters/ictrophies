@@ -48,13 +48,13 @@ AddEventHandler("ice_trophies:server:newTrophy", function(id, currentTrophies)
     end
 end)
 
-RegisterServerCallback ({
+CreateServerCallback ({
     eventName = 'ice-test:test',
-    eventCallback = function(source, result, data, value)
+    eventCallback = function(source, cb, result, data, value)
         result = "hola mundo soy el id: " .. source 
         data = "oleeee"
         value = "pepe"
 
-        return result, data, value
+        cb(result, data, value)
     end
 })
