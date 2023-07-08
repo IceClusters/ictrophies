@@ -54,6 +54,16 @@ Citizen.CreateThread(function()
         end
     }
 end)
+local isOpen = false
+RegisterKeyMapping("trophyList", "Open Trophies", "keyboard", "l")
+RegisterCommand("trophyList", function()
+    SendNUIMessage({
+        action = "OpenMenu"
+        open = isOpen
+    })
+    SetNuiFocus(not isOpen, not isOpen)
+    isOpen = not isOpen
+end, false)
 
 RegisterCommand("trophy", function()
     NewTrophy("car")

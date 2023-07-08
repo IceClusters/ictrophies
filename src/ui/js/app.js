@@ -1,5 +1,6 @@
 import confetti from "https://cdn.skypack.dev/canvas-confetti@1.4.0";
 let exploding = false;
+let isOpen = false;
 
 const defaults = {
     particleCount: 500,
@@ -140,6 +141,7 @@ function Trophy(title, description, type, confeti, sound) {
         }, 10000);
     }
 }
+
 $(document).ready(function () {
     let trophy = new Trophy("title", "description", 2, true, true).Show();
 
@@ -148,6 +150,14 @@ $(document).ready(function () {
             case "NewTrophy":
                 const a = event.data;
                 let trophy = new Trophy(a.title, a.description, a.type, a.confetti, a.sound).Show();
+                break;
+            case "OpenMenu":
+                if (event.data.open) {
+                    $("#container__menu").fadeOut(700);
+                } else {
+                    $("#container__menu").fadeIn(700);
+                }
+                break;
         }
     })
 });
