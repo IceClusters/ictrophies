@@ -10,8 +10,8 @@ body {
 
 .container__menu {
     position: absolute;
-    display: flex;
-    /* display: none; */
+    /* display: flex; */
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -36,7 +36,7 @@ body {
     display: grid;
     gap: 2% 2%;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 0.5fr 0.6fr 1.5fr;
+    grid-template-rows: 0.3fr 0.6fr 1.5fr;
     width: 100%;
     height: 100%;
 }
@@ -50,7 +50,7 @@ body {
     grid-area: 1 / 1 / 2 / 4;
 }
 
-.section__archivements {
+.section__achivements {
     position: relative;
     grid-area: 2 / 1 / 3 / 2;
 }
@@ -87,12 +87,23 @@ body {
     position: absolute;
 }
 
+.title__menu {
+    position: absolute;
+    font-size: 2.2vh;
+    color: white;
+    left: 2vh;
+    font-family: 'Raleway', sans-serif;
+    text-shadow: 0 0 0.3vh var(--main-color);
+    font-weight: 600;
+    z-index: 22;
+}
+
 .container_logo {
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 20vh;
+    width: 100%;
     text-align: right;
     right: 0;
 }
@@ -143,8 +154,22 @@ body {
 
 .archivements {
     position: absolute;
+    background-image: url("https://i.imgur.com/EVQD7JJ.png");
+    background-size: cover;
+    background-position: center;
     width: 95%;
     right: 0;
+}
+
+
+.row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    border-radius: 0.5vh;
+    overflow: hidden;
 }
 
 .icon__style {
@@ -153,28 +178,39 @@ body {
     align-items: center;
     justify-content: center;
     text-align: left;
+    border: 1.5px solid rgb(255, 255, 255, 0.1);
+    border-radius: .5vh;
+    padding: .5vh;
     margin: 1vh;
-    margin-left: 2vh;
-    color: var(--silver-color-one);
+    color: var(--silver-color-two);
 }
 
 .title__style {
-    margin-left: 2vh;
     color: var(--silver-color-two);
 }
 
 .value__style {
     position: relative;
-    margin: 1vh;
+    /* margin: 1vh; */
     margin-left: 2vh;
-    font-size: 1.5vw;
+    font-size: 2.2vw;
     color: var(--silver-color-two);
 }
 
 .progression {
     position: absolute;
+    background-image: url("https://i.imgur.com/LgEdEgY.png");
+    background-size: cover;
+    background-position: center;
     width: 95%;
     left: 0;
+}
+
+.badges {
+    position: absolute;
+    background-image: url("https://i.imgur.com/U4BCue9.png");
+    background-size: cover;
+    background-position: center;
 }
 
 .trophies {

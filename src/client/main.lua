@@ -67,6 +67,7 @@ end
 --         end
 --     }
 -- end)
+
 RegisterKeyMapping("trophyList", "Open Trophies", "keyboard", "l")
 RegisterCommand("trophyList", function()
     if(IsNuiFocused()) then 
@@ -76,18 +77,21 @@ RegisterCommand("trophyList", function()
         action = "OpenMenu"
     })
     SetNuiFocus(true, true)
+    SetNuiFocusKeepInput(true)
 end, false)
 
 RegisterCommand("trophy", function()
-    NewTrophy("job")
+    NewTrophy("car")
 end, false)
 
 RegisterCommand("trophy2", function()
     NewTrophy("house")
 end, false)
 
-RegisterNUICallback("ice_trophies:menuClose", function()
+RegisterNUICallback("menuclose", function(cb)
+    print("close")
     SetNuiFocus(false, false)
+    SetNuiFocusKeepInput(false)
 end)
 
 -- print(#Config.Trophies)

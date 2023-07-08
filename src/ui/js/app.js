@@ -32,11 +32,6 @@ const fire = (particleRatio, opts) => {
     );
 };
 
-$(document).ready(function () {
-    notify.currentTime = 0
-    notify.play();
-});
-
 function shootConfetti(type) {
     switch (type) {
         case 0:
@@ -143,7 +138,7 @@ function Trophy(title, description, type, confeti, sound) {
 }
 
 $(document).ready(function () {
-    let trophy = new Trophy("title", "description", 2, true, true).Show();
+    // let trophy = new Trophy("title", "description", 2, true, true).Show();
 
     window.addEventListener("message", function (event) {
         switch (event.data.action) {
@@ -157,15 +152,25 @@ $(document).ready(function () {
                 }
                 isOpen = true;
                 break;
+            case "UpdateTrophiesData":
+                console.log(JSON.stringify(event.data))
+                // event.data.trophiesAmount
+                // event.data.allTrophies
+                // event.data.trophiesPercentage
+                // event.data.trophies
+                break;
+            default:
+                console.error("Can't fined event: " + event.data.action)
+                break;
         }
     })
 });
 
-document.addEventListener("keypress", function (event) {
-    if (event.keyCode == 27 || event.keyCode == 76) {
+window.addEventListener("keydown", function (event) {
+    if (isOpen && (event.keyCode == 27 || event.keyCode == 76)) {
         isOpen = false;
         $(".container__menu").css({ "display": "none" }).fadeOut(700);
-        $.post("http://ice_trophies/ice_trophies:menuClose", JSON.stringify({}));
+        $.post("https://ice_trophies/menuclose");
     }
 });
 
