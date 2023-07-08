@@ -152,17 +152,22 @@ $(document).ready(function () {
                 let trophy = new Trophy(a.title, a.description, a.type, a.confetti, a.sound).Show();
                 break;
             case "OpenMenu":
-                if (event.data.open) {
-                    $("#container__menu").fadeOut(700);
-                } else {
-                    $("#container__menu").fadeIn(700);
+                if (!isOpen) {
+                    $(".container__menu").css({ "display": "flex" }).fadeIn(700);
                 }
+                isOpen = true;
                 break;
         }
     })
 });
 
-
+document.addEventListener("keypress", function (event) {
+    if (event.keyCode == 27 || event.keyCode == 76) {
+        isOpen = false;
+        $(".container__menu").css({ "display": "none" }).fadeOut(700);
+        $.post("http://ice_trophies/ice_trophies:menuClose", JSON.stringify({}));
+    }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     const name = "KDex"
@@ -170,5 +175,4 @@ document.addEventListener("DOMContentLoaded", () => {
     const imgUrl = `http://via.placeholder.com/100x100&text=${nombre}`
     const userPhoto = document.getElementById("logo_user");
     userPhoto.innerHTML = `<img src="${imgUrl}">`;
-
 });

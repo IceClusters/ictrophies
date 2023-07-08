@@ -54,15 +54,15 @@ Citizen.CreateThread(function()
         end
     }
 end)
-local isOpen = false
 RegisterKeyMapping("trophyList", "Open Trophies", "keyboard", "l")
 RegisterCommand("trophyList", function()
+    if(IsNuiFocused()) then 
+        return
+    end
     SendNUIMessage({
         action = "OpenMenu"
-        open = isOpen
     })
-    SetNuiFocus(not isOpen, not isOpen)
-    isOpen = not isOpen
+    SetNuiFocus(true, true)
 end, false)
 
 RegisterCommand("trophy", function()
@@ -72,5 +72,9 @@ end, false)
 RegisterCommand("trophy2", function()
     NewTrophy("house")
 end, false)
+
+RegisterNUICallback("ice_trophies:menuClose", function()
+    SetNuiFocus(false, false)
+end)
 
 exports('NewTrophy', NewTrophy)
