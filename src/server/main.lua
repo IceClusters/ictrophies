@@ -10,6 +10,7 @@ RegisterServerEvent("ice_trophies:server:getCurrentTrophies")
 AddEventHandler("ice_trophies:server:getCurrentTrophies", function()
     local src = source
     local license = GetLicense(src)
+    local steamName = GetPlayerName(src)
     if Config.Mysql == "oxmysql" then
         local trophiesData = exports.oxmysql:query_async("SELECT trophies FROM players_trophies WHERE license = @license", {["@license"] = license})
         if #trophiesData ~= 0 then 
@@ -17,9 +18,7 @@ AddEventHandler("ice_trophies:server:getCurrentTrophies", function()
         else
             trophiesData = {}
         end
-        TriggerClientEvent("ice_trophies:client:getCurrentTrophies", src, trophiesData)
-    elseif Config.Mysql == "mysql-async" then
-
+        TriggerClientEvent("ice_trophies:client:getCurrentTrophies", src, trophiesData, steamName)
     elseif Config.Mysql == "icemysql" then
         local trophiesData = exports["ice_mysql"]:MakeQuery(1, "SELECT trophies FROM players_trophies WHERE license = ?", {license})
         if #trophiesData ~= 0 then 
@@ -27,7 +26,7 @@ AddEventHandler("ice_trophies:server:getCurrentTrophies", function()
         else
             trophiesData = {}
         end
-        TriggerClientEvent("ice_trophies:client:getCurrentTrophies", src, trophiesData)
+        TriggerClientEvent("ice_trophies:client:getCurrentTrophies", src, trophiesData, steamName)
     else
         print("Can't find mysql system")
     end
@@ -49,8 +48,6 @@ AddEventHandler("ice_trophies:server:newTrophy", function(id, currentTrophies)
             exports.oxmysql:update("UPDATE players_trophies SET trophies = @trophies WHERE license = @license", {["@license"] = license,["@trophies"] = json.encode(currentTrophies)})
         end
         TriggerClientEvent("ice_trophies:client:getCurrentTrophies", src, currentTrophies)
-    elseif Config.Mysql == "mysql-async" then
-
     elseif Config.Mysql == "icemysql" then
         if count == 1 then 
             exports["ice_mysql"]:MakeQuery(1, "INSERT INTO players_trophies (license, trophies) VALUES (?, ?)", {license,json.encode(currentTrophies)})
@@ -62,14 +59,3 @@ AddEventHandler("ice_trophies:server:newTrophy", function(id, currentTrophies)
         print("Can't find mysql system")
     end
 end)
-
-CreateServerCallback ({
-    eventName = 'ice-test:test',
-    eventCallback = function(source, cb, result, data, value)
-        result = "hola mundo soy el id: " .. source 
-        data = "oleeee"
-        value = "pepe"
-
-        cb(result, data, value)
-    end
-})

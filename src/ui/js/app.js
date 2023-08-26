@@ -2,6 +2,13 @@ import confetti from "https://cdn.skypack.dev/canvas-confetti@1.4.0";
 let exploding = false;
 let isOpen = false;
 
+const trophiesImage = [
+    "https://i.imgur.com/eay4WBv.png",
+    "https://i.imgur.com/Wotxh7E.png",
+    "https://i.imgur.com/LZH4HMl.png",
+    "https://i.imgur.com/a0yuCxN.png"
+]
+
 const defaults = {
     particleCount: 500,
     spread: 80,
@@ -33,8 +40,23 @@ const fire = (particleRatio, opts) => {
 };
 
 function shootConfetti(type) {
+    var canvas = document.getElementById('canva__noty');
+    // canvas.style.display = "none"
+    setTimeout(() => {
+        canvas.confetti = canvas.confetti || confetti.create(canvas, { resize: true });
+
+        canvas.confetti({
+            spread: 10,
+            particleCount: 100,
+            scalar: 0.4,
+            origin: { y: 1.1 }
+        });
+        // canvas.style.display = ""
+    }, 901);
+
     switch (type) {
         case 0:
+        case 1:
             window.setTimeout(() => {
                 fire(0.25, {
                     spread: 26,
@@ -64,7 +86,7 @@ function shootConfetti(type) {
                 }, 300);
             }, 300);
             break;
-        case 1:
+        case 2:
             var duration = 9 * 1000;
             var animationEnd = Date.now() + duration;
             var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -85,8 +107,9 @@ function shootConfetti(type) {
                 confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
                 confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
             }, 250);
+
             break;
-        case 2:
+        case 3:
             var end = Date.now() + (9 * 1000);
             // go Buckeyes!
             var colors = ['#bb0000', '#ffffff'];
@@ -123,6 +146,8 @@ function Trophy(title, description, type, confeti, sound) {
     this.confeti = confeti;
     this.sound = sound;
     this.Show = function () {
+        console.log(trophiesImage[this.type])
+        $("#achievement-logo").attr("src", trophiesImage[this.type])
         $("#achievementTitle").html(this.title);
         $("#achievementDescription").html(this.description);
         $("#achievementContainer").css("display", "block")
@@ -137,27 +162,76 @@ function Trophy(title, description, type, confeti, sound) {
     }
 }
 
-$(document).ready(function () {
-    // let trophy = new Trophy("title", "description", 2, true, true).Show();
+let isOpening = false;
 
+$(document).ready(function () {
     window.addEventListener("message", function (event) {
         switch (event.data.action) {
             case "NewTrophy":
                 const a = event.data;
+                $("#achievementSound")[0].volume = Number(a.volume)
                 let trophy = new Trophy(a.title, a.description, a.type, a.confetti, a.sound).Show();
                 break;
             case "OpenMenu":
-                if (!isOpen) {
-                    $(".container__menu").css({ "display": "flex" }).fadeIn(700);
-                }
-                isOpen = true;
+                if (isOpening || isOpen) return;
+                isOpening = true
+                $(".container__menu").removeClass("animate__fadeOutDown");
+                $(".container__menu").css({ "display": "flex" })
+                $(".container__menu").addClass("animate__fadeInUp");
+                var sound = new Howl({
+                    src: ['https://cdn.discordapp.com/attachments/1004681367214370877/1127927952546480219/transition.mp3'],
+                    volume: 0.4,
+                    rate: 1.4,
+                });
+                sound.play()
+                setTimeout(() => {
+                    isOpening = false;
+                    isOpen = true;
+                }, 1000);
                 break;
             case "UpdateTrophiesData":
                 console.log(JSON.stringify(event.data))
-                // event.data.trophiesAmount
-                // event.data.allTrophies
-                // event.data.trophiesPercentage
-                // event.data.trophies
+                $("#maxTrophies").html(event.data.allTrophies)
+                $("#trohpiesPercentage").html(event.data.trophiesPercentage + "%")
+
+                for (let i in event.data.trophiesCategory) {
+                    $(`#badge${i}`).html(event.data.trophiesCategory[i])
+                }
+                let trophiesAmountAchived = 0
+                $("#trophiesList").html("")
+                for (let trophie in event.data.trophies) {
+                    trophiesAmountAchived += 1
+                    $("#trophiesList").append(`
+                        <div class="card">
+                            <div class="row__card">
+                                <div class="badge__row badge__card position__style"><img
+                                        src="${trophiesImage[event.data.config[trophie].other.type]}"></div>
+                                <div class="badgeTitle text__style position__style">${event.data.config[trophie].title}</div>
+                                <div class="badgeSubTitle text__style position__style">${event.data.config[trophie].description}</div>
+                                <div class="percentage position__style">${event.data.trophies[trophie]}</div>
+                            </div>
+                        </div>
+                    `)
+                }
+                if (trophiesAmountAchived == 0) {
+                    $("#no-items").css("display", "flex")
+                } else {
+                    $("#no-items").css("display", "none")
+                }
+
+                $("#playerName").html(event.data.steamName)
+                var nombre = event.data.steamName
+                for (var i = 0; i < nombre.length; i++)
+                    if (nombre[i] === nombre[i].toUpperCase()) nombre = nombre[i]
+
+                if (nombre.length > 1) nombre = nombre[0].toUpperCase()
+                const imgUrl = `http://via.placeholder.com/100x100&text=${nombre}`
+                const userPhoto = document.getElementById("logo_user");
+                userPhoto.innerHTML = `<img src="${imgUrl}">`;
+                break;
+            case "SetTrophyVolumen":
+                if (Number(event.data.volumen) > 1 || Number(event.data.volumen) < 0) return;
+                $("#achievementSound")[0].volume = Number(event.data.volumen)
                 break;
             default:
                 console.error("Can't fined event: " + event.data.action)
@@ -168,16 +242,15 @@ $(document).ready(function () {
 
 window.addEventListener("keydown", function (event) {
     if (isOpen && (event.keyCode == 27 || event.keyCode == 76)) {
-        isOpen = false;
-        $(".container__menu").css({ "display": "none" }).fadeOut(700);
-        $.post("https://ice_trophies/menuclose");
+        if (isOpening || !isOpen) return;
+        isOpening = true
+        $(".container__menu").removeClass("animate__fadeInUp");
+        $(".container__menu").addClass("animate__fadeOutDown");
+        setTimeout(() => {
+            isOpening = false
+            isOpen = false;
+            $.post("https://ice_trophies/menuclose");
+            $(".container__menu").css({ "display": "none" })
+        }, 1000);
     }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    const name = "KDex"
-    const nombre = name.split(" ").map((word) => word.charAt(0).toUpperCase()).join("");
-    const imgUrl = `http://via.placeholder.com/100x100&text=${nombre}`
-    const userPhoto = document.getElementById("logo_user");
-    userPhoto.innerHTML = `<img src="${imgUrl}">`;
 });

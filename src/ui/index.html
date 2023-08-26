@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.min.js" type="text/javascript"></script>
     <title>Document</title>
 </head>
 
@@ -22,14 +24,16 @@
     <audio id="achievementSound" src="./sound.ogg"></audio>
     <div class="container__notify">
         <div class="notify" id="achievementContainer" style="display: none;">
+
             <div class="achievement-banner animated">
+                <canvas id="canva__noty"></canvas>
                 <div class="achievement-loader"></div>
                 <div class="achievement-loader"></div>
                 <div class="achievement-loader"></div>
                 <div class="achievement-loader"></div>
                 <div class="achievement-loader"></div>
-                <div class="achievement-trophy xbox-icon xbox-logo"><i class="fas fa-trophy trophie__img"
-                        style="font-size: 3.2vh;"></i></div>
+                <div class="achievement-trophy xbox-icon xbox-logo"><img class="trophie__img" id="achievement-logo"
+                        src="https://i.imgur.com/a0yuCxN.png"></img></div>
                 <div class="achievement-text">
                     <div class="flex">
                         <div class="achievement-notification" id="achievementTitle">Achievement Unlocked</div>
@@ -48,59 +52,81 @@
         </div>
     </div>
 
-    <div class="container__menu">
+    <div class="container__menu animate__animated ">
         <div class="menu">
             <div class="grid">
                 <div class="section__name">
-
                     <div class="container_logo">
-                        <div class="title__menu">Achivements</div>
-                        <div class="username__text">KDEX</div>
-                        <div id="logo_user"></div>
+                        <div class="title__menu animate__fadeInDown animate__animated" style="animation-delay: 0.5s;">
+                            Achivements</div>
+                        <div class="username__text animate__fadeInDown animate__animated" style="animation-delay: 1s;"
+                            id="playerName">KDEX</div>
+                        <div id="logo_user" class="animate__fadeInRight animate__animated"
+                            style="animation-delay: 1.4s;"></div>
                     </div>
 
                 </div>
-                <div class="section__achivements">
+                <div class="section__achivements animate__zoomIn animate__animated" style="animation-delay: 0.5s;">
                     <div class="container__style archivements">
                         <div class="row">
                             <div class="icon__style"><i class="fas fa-trophy"></i></div>
-                            <div class="title__style title__section">Amount</div>
+                            <div class="title__style title__section text__style">Amount</div>
                         </div>
 
-                        <div class="value__style value__section">200</div>
+                        <div class="value__style value__section" id="maxTrophies">0</div>
                     </div>
                 </div>
-                <div class="section__friends">
+                <div class="section__friends animate__zoomIn animate__animated" style="animation-delay: 1s;">
                     <div class="container__style badges">
-
+                        <div class="row__badges">
+                            <div class="column">
+                                <div class="badges__icons"><img src="https://i.imgur.com/eay4WBv.png"></div>
+                                <div class="text__style" id="badge0">20</div>
+                            </div>
+                            <div class="column">
+                                <div class="badges__icons"><img src="https://i.imgur.com/Wotxh7E.png"></div>
+                                <div class="text__style" id="badge1">10</div>
+                            </div>
+                            <div class="column">
+                                <div class="badges__icons"><img src="https://i.imgur.com/LZH4HMl.png"></div>
+                                <div class="text__style" id="badge2">5</div>
+                            </div>
+                            <div class="column">
+                                <div class="badges__icons"><img src="https://i.imgur.com/a0yuCxN.png"></div>
+                                <div class="text__style" id="badge3">1</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="section__progression">
+                <div class="section__progression animate__zoomIn animate__animated" style="animation-delay: 1.3s;">
                     <div class="container__style progression">
                         <div class="row">
                             <div class="icon__style"><i class="fas fa-chart-line"></i></div>
-                            <div class="title__style title__section">Progress</div>
+                            <div class="title__style title__section text__style">Progress</div>
                         </div>
 
-                        <div class="value__style value__section">31%</div>
+                        <div class="value__style value__section text__style" id="trohpiesPercentage">31%</div>
                     </div>
                 </div>
-                <div class="section__trophies">
+                <div class="section__trophies animate__fadeInUp animate__animated" style="animation-delay: 1.0s;">
                     <div class="trophies">
-                        <div class="slider_trophies">
+                        <div class="slider_trophies" id="trophiesList">
+
 
                         </div>
-                        <p id="no-items">No tienes trofeos</p>
+                        <p id="no-items" class="text__style">No tienes trofeos</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container_confeti">
+    <!-- <div class="container_confeti">
         <canvas id="confeti" class="active"></canvas>
-    </div>
+    </div> -->
+    <script src="js/library/SoundPlayer.js" type="text/javascript"></script>
     <script src="js/app.js" type="module"></script>
+
 </body>
 
 </html>
