@@ -61,9 +61,9 @@ function NewTrophy(id)
         end
     end
 
-    -- if alreadyExist then 
-    --     return
-    -- end
+    if alreadyExist then 
+        return
+    end
     if currentTrophies ~= nil then 
         TriggerServerEvent("ictrophies:server:newTrophy", id, currentTrophies)
     else
