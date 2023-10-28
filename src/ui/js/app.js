@@ -249,7 +249,7 @@ window.addEventListener("keydown", function (event) {
         setTimeout(() => {
             isOpening = false
             isOpen = false;
-            $.post("https://ice_trophies/menuclose");
+            $.post("https://ictrophies/menuclose");
             $(".container__menu").css({ "display": "none" })
         }, 1000);
     }
