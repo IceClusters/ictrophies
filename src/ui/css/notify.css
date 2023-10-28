@@ -10,7 +10,6 @@ body {
 }
 
 .container__notify {
-  /* display: none; */
   position: absolute;
   display: flex;
   align-items: center;
@@ -21,7 +20,6 @@ body {
 
 #canva__noty {
   position: absolute;
-  /* background: red; */
 }
 
 .notify {
@@ -168,7 +166,6 @@ canvas {
 }
 
 .trophie__img {
-  /* text-shadow: 0 0 0.4vh #fff !important; */
   width: 3.5vh;
 }
 
@@ -313,7 +310,6 @@ canvas {
 @keyframes achievementTextAnimationFrames {
   0% {
     opacity: 0;
-    /* top: -77px; */
   }
 
   40% {
@@ -322,35 +318,28 @@ canvas {
 
   55% {
     opacity: 1;
-    /* top: -77px; */
-    /* right: 0; */
   }
 
   100% {
     opacity: 0;
-    /* top: -138px; */
   }
 }
 
 @keyframes achievementNameAnimationFrames {
   0% {
     opacity: 0;
-    /* top: 75px; */
+
   }
 
   20% {
     opacity: 1;
-    /* top: 9px; */
   }
 
   90% {
     opacity: 1;
-    /* top: 9px; */
-    /* right: 0; */
   }
 
   100% {
     opacity: 0;
-    /* top: 9px; */
   }
 }
