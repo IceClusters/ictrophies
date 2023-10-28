@@ -4,5 +4,7 @@ Take your FiveM server to new heights with our feature-packed script! Our script
 
 https://github.com/IceClusters/ice_trophies/assets/96537843/8eb8dab1-1b3b-41fc-922f-e65dbc1e3b65
 
-# [Documentation](https://iceclusters.github.io/docs)
+# [Documentation](https://iceclusters.github.io/docs/icTrophies)
 # [Discord](https://discord.gg/5tWchb759Z)
+
+
