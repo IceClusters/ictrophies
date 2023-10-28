@@ -2,7 +2,7 @@ local currentTrophies = {}
 local trophiesRecived = false
 
 Citizen.CreateThread(function()
-    TriggerServerEvent("ice_trophies:server:getCurrentTrophies")
+    TriggerServerEvent("ictrophies:server:getCurrentTrophies")
 end)
 
 function TableLength(tabla)
@@ -15,8 +15,13 @@ function TableLength(tabla)
     return amount
 end
 
-RegisterNetEvent("ice_trophies:client:getCurrentTrophies")
-AddEventHandler("ice_trophies:client:getCurrentTrophies", function(data, playerName)
+RegisterNetEvent("ictrophies:client:sendTrophies")
+AddEventHandler("ictrophies:client:sendTrophies", function(id)
+    NewTrophy(id)
+end)
+
+RegisterNetEvent("ictrophies:client:getCurrentTrophies")
+AddEventHandler("ictrophies:client:getCurrentTrophies", function(data, playerName)
     trophiesRecived = true
     currentTrophies = data
     local trophiesCategory = {
@@ -60,9 +65,9 @@ function NewTrophy(id)
     --     return
     -- end
     if currentTrophies ~= nil then 
-        TriggerServerEvent("ice_trophies:server:newTrophy", id, currentTrophies)
+        TriggerServerEvent("ictrophies:server:newTrophy", id, currentTrophies)
     else
-        TriggerServerEvent("ice_trophies:server:newTrophy", id, {})
+        TriggerServerEvent("ictrophies:server:newTrophy", id, {})
     end
 
     SendNUIMessage({
@@ -81,7 +86,7 @@ local isOpen = false
 RegisterKeyMapping("trophyList", "Open Trophies", "keyboard", Config.OpenMenu)
 RegisterCommand("trophyList", function()
     -- if not trophiesRecived then
-        TriggerServerEvent("ice_trophies:server:getCurrentTrophies")
+        TriggerServerEvent("ictrophies:server:getCurrentTrophies")
     -- end
     if(IsNuiFocused()) then 
         return
@@ -104,7 +109,7 @@ end, false)
 
 
 RegisterCommand("fixtrophy", function()
-    TriggerServerEvent("ice_trophies:server:getCurrentTrophies")
+    TriggerServerEvent("ictrophies:server:getCurrentTrophies")
 end, false)
 
 RegisterNUICallback("menuclose", function(cb)
