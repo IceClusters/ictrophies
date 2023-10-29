@@ -1,6 +1,7 @@
 fx_version 'cerulean'
 games { 'gta5' }
 author 'Ice Core'
+lua54 'kdex'
 client_scripts {
     'src/client/*.lua'
 }

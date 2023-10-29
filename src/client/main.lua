@@ -1,6 +1,11 @@
 local currentTrophies = {}
 local trophiesRecived = false
 
+local isQB = GetResourceState('qb-core'):match('start')
+local isESX = GetResourceState('es_extended'):match('start')
+local framework = isQB and exports['qb-core']:GetCoreObject() or isESX and exports['es_extended']:getSharedObject() or {}
+
+
 Citizen.CreateThread(function()
     TriggerServerEvent("ictrophies:server:getCurrentTrophies")
 end)
@@ -8,8 +13,8 @@ end)
 function TableLength(tabla)
     local amount = 0
     if tabla ~= nil then
-        for _ in pairs(tabla) do
-            amount = amount + 1
+        for _ in pairs(tabla) do 
+            amount += 1
         end
     end
     return amount
@@ -32,10 +37,11 @@ AddEventHandler("ictrophies:client:getCurrentTrophies", function(data, playerNam
     }
     if data ~= nil  then
         for trophieName, v in pairs(data) do 
-            print(trophieName)
-            trophiesCategory[Config.Trophies[trophieName]["other"]["type"]] = trophiesCategory[Config.Trophies[trophieName]["other"]["type"]] + 1
+            -- print(trophieName)
+            trophiesCategory[Config.Trophies[trophieName]["other"]["type"]] += 1
         end
     end
+    
     SendNUIMessage({
         action = "UpdateTrophiesData",
         trophies = currentTrophies,
@@ -64,11 +70,16 @@ function NewTrophy(id)
     if alreadyExist then 
         return
     end
-    if currentTrophies ~= nil then 
-        TriggerServerEvent("ictrophies:server:newTrophy", id, currentTrophies)
-    else
-        TriggerServerEvent("ictrophies:server:newTrophy", id, {})
+
+    if (next(framework)~= nil and (Config.Trophies[id]["reward"]["enable"])) then 
+        if Config.Trophies[id]["reward"]["type"] == "money" then 
+            TriggerServerEvent("ictrophies:server:giveMoney", Config.Trophies[id]["reward"]["amount"])
+        elseif Config.Trophies[id]["reward"]["type"] == "item" then 
+            TriggerServerEvent("ictrophies:server:giveItem", Config.Trophies[id]["reward"]["item"], Config.Trophies[id]["reward"]["amount"])
+        end
     end
+
+    TriggerServerEvent("ictrophies:server:newTrophy", id, currentTrophies or {}) 
 
     SendNUIMessage({
         action = "NewTrophy",
@@ -103,7 +114,7 @@ end, false)
 
 RegisterCommand("trophy", function(source, args)
     -- if args[1] ~= nil then 
-        NewTrophy("phone")
+        NewTrophy("job")
     -- end
 end, false)
 
@@ -113,7 +124,7 @@ RegisterCommand("fixtrophy", function()
 end, false)
 
 RegisterNUICallback("menuclose", function(cb)
-    print("close")
+    -- print("close")
     SetNuiFocus(false, false)
     SetNuiFocusKeepInput(false)
     isOpen = false

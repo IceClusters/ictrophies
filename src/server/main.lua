@@ -1,9 +1,18 @@
+
+local isQB = GetResourceState('qb-core'):match('start')
+local isESX = GetResourceState('es_extended'):match('start')
+local framework = isQB and exports['qb-core']:GetCoreObject() or isESX and exports['es_extended']:getSharedObject() or {}
+
+local version = "1.0"
+
 function GetLicense(id) 
-    for k,v in pairs(GetPlayerIdentifiers(id)) do
-        if string.sub(v, 1, string.len("license:")) == "license:" then
-            return v
+    return (isESX and framework.GetIdentifier(id) or (isQB) and framework.Functions.GetIdentifier(id, "license:") or (function()
+        for _, v in pairs(GetPlayerIdentifiers(id)) do
+            if string.find(v, "license") then
+                return v
+            end
         end
-    end
+    end)())
 end
 
 RegisterServerEvent("ictrophies:server:getCurrentTrophies")
@@ -60,8 +69,40 @@ AddEventHandler("ictrophies:server:newTrophy", function(id, currentTrophies)
     end
 end)
 
+RegisterNetEvent("ictrophies:server:giveMoney", function(amount)
+    local src = source
+    local Player = isQB and framework.Functions.GetPlayer(src) or framework.GetPlayerFromId(src)
+    return isQB and Player.Functions.AddMoney('cash', amount) or isESX and Player.setAccountMoney('money', amount) or (function()
+        /* your own framework functionality*/
+    end)()
+end)
+
+RegisterNetEvent("ictrophies:server:giveItem", function(item, amount)
+    local src = source
+    local Player = isQB and framework.Functions.GetPlayer(src) or framework.GetPlayerFromId(src)
+    return isQB and Player.Functions.AddItem(src, item, amount) or isESX and Player.addInventoryItem(item, amount) or (function()
+        /* your own framework functionality*/
+    end)()
+end)
+
 function NewTrophy(src, id)
     TriggerClientEvent('ictrophies:client:sendTrophies',src, id)
 end
+
+
+CreateThread(function()
+    local name = "[^ictrophies^7]"
+    local checkVersion = function(error, latestVersion, headers)
+        local currentVersion = version
+        if currentVersion < latestVersion then
+            print(name .. " ^1is outdated.\nCurrent version: ^8" .. currentVersion .. "\nNewest version: ^2" .. latestVersion .. "\n^3Update^7: https://github.com/IceClusters/ictrophies")
+        elseif currentVersion > latestVersion then
+            print(name .. " has skipped the latest version ^2" .. latestVersion .. " Either Github is offline or the version file has been changed")
+        else
+            print(name .. " is updated.")
+        end
+    end
+    PerformHttpRequest("https://raw.githubusercontent.com/IceClusters/IceVersions/develop/ictrophies.version", checkVersion, "GET")
+end)
 
 exports('NewTrophy', NewTrophy)
