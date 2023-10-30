@@ -72,7 +72,7 @@ end)
 RegisterNetEvent("ictrophies:server:giveMoney", function(amount)
     local src = source
     local Player = isQB and framework.Functions.GetPlayer(src) or framework.GetPlayerFromId(src)
-    return isQB and Player.Functions.AddMoney('cash', amount) or isESX and Player.setAccountMoney('money', amount) or (function()
+    return isQB and Player.Functions.AddMoney('cash', amount) or isESX and Player.addAccountMoney('money', amount) or (function()
         /* your own framework functionality*/
     end)()
 end)
