@@ -112,6 +112,23 @@ RegisterCommand("trophyList", function()
     disableMovementAction()
 end, false)
 
+
+RegisterNetEvent("ictrophies:client:openMenu")
+AddEventHandler('ictrophies:client:openMenu', function()
+    TriggerServerEvent("ictrophies:server:getCurrentTrophies")
+    if(IsNuiFocused()) then 
+        return
+    end
+    SendNUIMessage({
+        action = "OpenMenu"
+    })
+    SetNuiFocus(true, true)
+    SetNuiFocusKeepInput(true)
+    isOpen = true
+
+    disableMovementAction()
+end)
+
 RegisterCommand("trophy", function(source, args)
     -- if args[1] ~= nil then 
         NewTrophy("job")

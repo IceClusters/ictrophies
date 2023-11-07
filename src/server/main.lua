@@ -3,7 +3,7 @@ local isQB = GetResourceState('qb-core'):match('start')
 local isESX = GetResourceState('es_extended'):match('start')
 local framework = isQB and exports['qb-core']:GetCoreObject() or isESX and exports['es_extended']:getSharedObject() or {}
 
-local version = "1.1"
+local version = "1.2"
 
 function GetLicense(id) 
     return (isESX and framework.GetIdentifier(id) or (isQB) and framework.Functions.GetIdentifier(id, "license:") or (function()
