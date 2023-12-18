@@ -106,3 +106,18 @@ CreateThread(function()
 end)
 
 exports('NewTrophy', NewTrophy)
+
+exports('HasTrophy', function(playerId, trophy)
+    local license = GetLicense(playerId)
+    local trophiesData = exports.oxmysql:query_async("SELECT trophies FROM players_trophies WHERE license = @license", {["@license"] = license})
+    if #trophiesData ~= 0 then 
+        trophiesData = json.decode(trophiesData[1]["trophies"])
+    else
+        trophiesData = {}
+    end
+    if trophiesData[trophy] then
+        return true
+    else
+        return false
+    end
+end)

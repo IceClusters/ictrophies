@@ -179,3 +179,7 @@ function disableMovementAction()
     end
 end
 exports('NewTrophy', NewTrophy)
+
+exports('HasTrophy', function(trophy)
+    return currentTrophies[trophy] ~= nil
+end)
